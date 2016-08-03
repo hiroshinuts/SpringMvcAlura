@@ -1,0 +1,36 @@
+package br.com.casadocodigo.loja.conf;
+
+import java.util.Properties;
+
+import javax.sql.DataSource;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.orm.jpa.JpaVendorAdapter;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
+
+public class JPAConfiguration {
+	
+	@Bean
+		public LocalContainerEntityManagerFactoryBean entityManagerFactory(){
+		LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
+		em.setDataSource(dataSource());
+		em.setPackagesToScan(new String[] {"br.com.casadocodigo.loja.models"});
+		
+		JpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
+		em.setJpaVendorAdapter(vendorAdapter);
+		em.setJpaProperties(additionalProperties());
+	}
+
+
+	private DataSource dataSource() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	private Properties additionalProperties() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}
