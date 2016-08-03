@@ -48,3 +48,9 @@ This warning can be switched off on the Team > Git > Confirmations and Warnings 
 
 !ENTRY org.eclipse.m2e.logback.appender 2 0 2016-08-03 11:14:47.061
 !MESSAGE The POM for org.apache.maven.plugins:maven-clean-plugin:jar:2.5 is missing, no dependency information available
+
+!ENTRY org.eclipse.jface.text 2 0 2016-08-03 14:30:58.305
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.number'
+
+!ENTRY org.eclipse.jface.text 2 0 2016-08-03 14:30:58.307
+!MESSAGE Duplicate template id: 'org.eclipse.wst.xslt.templates.xpath.round'
