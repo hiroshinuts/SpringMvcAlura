@@ -1,7 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+
 
 <!DOCTYPE html>
 <html>
@@ -10,39 +10,50 @@
 <title>Cadastro De Produtos</title>
 </head>
 <body>
+	<spring:hasBindErrors name="product">
+		<ul>
+			<c:forEach var="error" items="${errors.allErrors}">
+			<li><spring:message code="${error.code}"
+			text="${error.defaultMessage}"/></li>
+			</c:forEach>
+		</ul>
+	</spring:hasBindErrors>
 
-	<form method="post" action="/casadocodigo/produtos">
+	<form:form action="${spring:mvcUrl('PC#save').build()}" method="post" commandName="product" enctype="multipart/form-data">
 		<div>
-			<label for="title">Titulo</label> <input type="text" name="title"
-				id="title" />
+			<label for="titulo">Titulo</label>
+			<form:input path="title"/>
+			<form:errors path="title"/>
 		</div>
 		<div>
-			<label for="description">DescriÃ§Ã£o</label>
-			<textarea rows="10" cols="20" name="description" id="description"></textarea>
+			<label for="descricao">Descrição</label>
+			<form:textarea path="description" rows="10" cols="20"/>
+			<form:errors path="description"/>
 		</div>
 		<div>
-			<label for="pages">NÃºmero de paginas</label> <input type="text"
-				name="pages" id="pages" />
+			<label for="numeroPaginas">Número de paginas</label>
+			<form:input path="pages"/>
+			<form:errors path="pages"/>
 		</div>
-
 		<div>
-			<c:forEach items="${types}" var="bookType" varStatus="status">
+			<label for="releaseDate">Data de lançamento</label>
+			<form:input path="releaseDate" type="date"/>			
+			<form:errors path="releaseDate"/>
+		</div>	
+	
+			<c:forEach items="${bookTypes}" var="bookType" varStatus="status">
 				<div>
-					<label for="price_${bookType}">${bookType}</label> <input
-						type="text" name="prices[${status.index}].value"
-						id="price_${bookType}" /> <input type="hidden"
-						name="prices[${status.index}].bookType" value="${bookType}" />
+					<label for="preco_${bookType}">${bookType}</label>
+					<input type="text" name="prices[${status.index}].value" id="preco_${bookType}"/>
+					<input type="hidden" name="prices[${status.index}].bookType" value="${bookType}"/>
 				</div>
 			</c:forEach>
 		</div>
-
+		</div>
 		<div>
 			<input type="submit" value="Enviar">
 		</div>
-
-
-	</form>
-
+	</form:form>
 
 </body>
 </html>
