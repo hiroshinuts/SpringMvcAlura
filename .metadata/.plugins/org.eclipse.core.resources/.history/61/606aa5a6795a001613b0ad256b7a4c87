@@ -1,0 +1,16 @@
+package br.com.casadocodigo.loja.controllers;
+
+import org.springframework.context.annotation.Bean;
+
+import com.amazonaws.auth.AWSCredentials;
+import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.services.s3.AmazonS3Client;
+
+public class AmazonConfiguration {
+	
+	@Bean
+	public AmazonS3Client s3Ninja() {
+		AWSCredentials credentials = new BasicAWSCredentials( , );
+	}
+
+}

@@ -40,7 +40,11 @@
 			<form:input path="releaseDate" type="date"/>			
 			<form:errors path="releaseDate"/>
 		</div>	
-	
+		<div>
+			<label for="summary">Sumario do livro</label>
+			<input type="file" name="summary"/>
+			<form:errors path="summaryPath"/>			
+		<div>
 			<c:forEach items="${bookTypes}" var="bookType" varStatus="status">
 				<div>
 					<label for="preco_${bookType}">${bookType}</label>

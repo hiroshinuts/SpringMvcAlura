@@ -10,13 +10,13 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import br.com.casadocodigo.loja.daos.ProductDAO;
 import br.com.casadocodigo.loja.models.BookType;
 import br.com.casadocodigo.loja.models.Product;
-import br.com.casadocodigo.loja.validation.ProductValidator;
 
 @Controller
 @Transactional
@@ -30,13 +30,23 @@ public class ProductsController {
 
 	@Autowired
 	private ProductDAO productDAO;
+	
+	@Autowired
+	private FileSaver fileSaver;
 
 	@RequestMapping(method = RequestMethod.POST)
-	public ModelAndView save(@Valid Product product, BindingResult bindingResult,
+	public ModelAndView save(MultipartFile summary, @Valid Product product, BindingResult bindingResult,
 			RedirectAttributes redirectAttributes) {
+		
+		System.out.println(summary.getName() + ";" + summary.getOriginalFilename());
+		
 		if (bindingResult.hasErrors()) {
 			return form(product);
 		}
+		
+		String webPath = fileSaver.write("uploaded-images", summary);
+		product.setSummaryPath(webPath);
+		
 		productDAO.save(product);
 		redirectAttributes.addFlashAttribute("sucesso", "Produto cadastrado com sucesso");
 		return new ModelAndView("redirect:produtos");

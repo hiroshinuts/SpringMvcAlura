@@ -31,11 +31,18 @@ public class Product {
 	private Integer pages;
 	@ElementCollection
 	private List<Price> prices = new ArrayList<Price>();
+	
 	@DateTimeFormat(iso=ISO.DATE)
 	private Calendar releaseDate;
+	private String summaryPath;
 	
 	
-	
+	public String getSummaryPath() {
+		return summaryPath;
+	}
+	public void setSummaryPath(String summaryPath) {
+		this.summaryPath = summaryPath;
+	}
 	public Calendar getReleaseDate() {
 		return releaseDate;
 	}

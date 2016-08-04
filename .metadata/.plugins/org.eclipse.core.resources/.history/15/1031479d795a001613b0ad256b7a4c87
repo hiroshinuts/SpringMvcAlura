@@ -1,0 +1,8 @@
+package br.com.casadocodigo.loja.controllers;
+
+public class AmazonConfiguration {
+	
+	@Bean
+	public Amazon
+
+}
